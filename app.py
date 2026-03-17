@@ -49,6 +49,11 @@ st.markdown("""
         border-radius: 8px;
         padding: 1.5rem;
         margin: 1rem 0;
+        color: #1a1a2e;
+    }
+    
+    .answer-box p {
+        color: #1a1a2e;
     }
     
     .chunk-card {
@@ -68,6 +73,23 @@ st.markdown("""
         padding: 0.5rem 2rem;
         font-weight: 600;
         width: 100%;
+    }
+    
+    /* Make spinner dots more visible */
+    .stSpinner > div > div {
+        background-color: #ff4757 !important;
+    }
+    
+    /* Target all spinner animations */
+    div[data-testid="stSpinner"] div div {
+        background-color: #ff4757 !important;
+    }
+    
+    /* Target animation keyframes */
+    @keyframes streamlitSpinner {
+        0% { background-color: #ff4757; }
+        50% { background-color: #ff6b81; }
+        100% { background-color: #ff4757; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -315,7 +337,7 @@ with tab2:
                                 answer = generate_answer(query, context)
                         
                         st.markdown(f"""
-                        <div class="answer-box">
+                        <div class="answer-box" style="color: #1a1a2e;">
                         {answer}
                         </div>
                         """, unsafe_allow_html=True)
@@ -366,7 +388,7 @@ with tab3:
             
             st.markdown("#### Generated Interview Questions:")
             st.markdown(f"""
-            <div class="answer-box">
+            <div class="answer-box" style="color: #1a1a2e;">
             {questions}
             </div>
             """, unsafe_allow_html=True)
