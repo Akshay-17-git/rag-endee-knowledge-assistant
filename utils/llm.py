@@ -33,7 +33,11 @@ def generate_answer(query: str, context: str, model: str = "mistral-small-latest
         return "Please set your Mistral API key in the sidebar to generate answers."
     
     try:
-        from mistralai import Mistral
+        # Try different package names
+        try:
+            from mistralai import Mistral
+        except ImportError:
+            from mistralai_sdk import Mistral
         
         client = Mistral(api_key=api_key)
         
@@ -87,10 +91,15 @@ def generate_interview_questions(resume_context: str, interview_type: str = "Tec
     
     try:
         from mistralai import Mistral
-        
-        client = Mistral(api_key=api_key)
-        
-        prompt = f"""Based on the following resume content, generate 8 {interview_type} interview questions.
+    except ImportError:
+        try:
+            from mistralai_sdk import Mistral
+        except ImportError:
+            return "Error: mistralai package not installed. Run: pip install mistralai"
+    
+    client = Mistral(api_key=api_key)
+    
+    prompt = f"""Based on the following resume content, generate 8 {interview_type} interview questions.
 The questions should be relevant to the candidate's skills, experience, and projects mentioned in the resume.
 
 Resume Content:

@@ -5,3 +5,4 @@ requests>=2.31.0
 pdfplumber>=0.9.0
 pandas>=2.0.0
 mistralai>=1.0.0
+mistralai-sdk>=1.0.0
